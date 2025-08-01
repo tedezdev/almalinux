@@ -36,8 +36,9 @@ echo "--------------------------------------------------"
 echo "[+] GPG anahtarları içe aktarılıyor..."
 echo "--------------------------------------------------"
 
-# GPG anahtarlarını ekle (AlmaLinux zaten varsa sorun olmaz)
+# AlmaLinux GPG anahtarlarını ekle (her ihtimale karşı hem lokal hem de URL üzerinden)
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux
 
 # EPEL GPG key indir ve içe aktar
 curl -sS https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8 -o /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
