@@ -33,36 +33,18 @@ EOF
 echo "[✓] Alastyr mirror repo başarıyla yapılandırıldı."
 
 echo "--------------------------------------------------"
-echo "[+] GPG anahtarları içe aktarılıyor..."
+echo "[+] AlmaLinux GPG anahtarı ekleniyor..."
 echo "--------------------------------------------------"
 
-# AlmaLinux GPG anahtarlarını ekle (her ihtimale karşı hem lokal hem de URL üzerinden)
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
 rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux
 
-# EPEL GPG key indir ve içe aktar
-curl -sS https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8 -o /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
-
-echo "[✓] GPG anahtarları başarıyla içe aktarıldı."
+echo "[✓] GPG anahtarı başarıyla eklendi."
 
 echo "--------------------------------------------------"
-echo "[+] DNF önbelleği temizleniyor ve yeniden oluşturuluyor..."
+echo "[+] EPEL kuruluyor..."
 echo "--------------------------------------------------"
 
-dnf clean all
-rm -rf /var/cache/dnf
-dnf makecache
-
-echo "[✓] DNF önbelleği temizlendi ve yeniden oluşturuldu."
-
-echo "--------------------------------------------------"
-echo "[+] EPEL release paketi indiriliyor ve kuruluyor..."
-echo "--------------------------------------------------"
-
-# EPEL release indir ve GPG doğrulama olmadan kur
-curl -LO https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-dnf install -y epel-release-latest-8.noarch.rpm --nogpgcheck
+dnf install -y epel-release
 
 echo "[✓] EPEL başarıyla kuruldu."
 
